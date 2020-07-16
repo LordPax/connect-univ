@@ -10,7 +10,7 @@ user=user_id # identifiant
 pw=user_pw # mot de passe
 ```
 
-# Usage
+## Usage
 ```
 usage : $0 <commands> \n
 startnet ........ ce connecte au réseau \n
