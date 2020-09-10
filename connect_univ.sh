@@ -11,19 +11,20 @@ startuniv ....... s'autentifie sur le réseau de l'université \n
 stopnet ......... ce déconnecte du réseau
 "
 
-if [ $# -eq 1 ]; then
-	if [ $1 == "startnet" ]; then
-		sudo netctl start $net
-		echo "connecter au réseau"
-	elif [ $1 == "startuniv" ]; then
-		curl -s -X POST -F "user=$user" -F "password=$pw" $url
-		echo "connecter au wifi de l'université"
-	elif [ $1 == "stopnet" ]; then
-		sudo netctl stop $net
-		echo "déconnecté du réseau"
-	else
-		echo -e $help
-	fi
+if [ $# -ne 1 ]; then
+    echo -e $help
+    exit 1
+fi
+
+if [ $1 == "startnet" ]; then
+    sudo netctl start $net
+    echo "connecter au réseau"
+elif [ $1 == "startuniv" ]; then
+    curl -s -X POST -F "user=$user" -F "password=$pw" $url
+    echo "connecter au wifi de l'université"
+elif [ $1 == "stopnet" ]; then
+    sudo netctl stop $net
+    echo "déconnecté du réseau"
 else
-	echo -e $help
+    echo -e $help
 fi
